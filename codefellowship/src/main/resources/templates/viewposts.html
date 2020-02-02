@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Here is what's being said</h1>
+<ul>
+    <li th:each="posts: ${allposts}" >
+        <h2> Post body: [[${post.body}]] <h5>Posted at: [[${post.createdAt}]]<br>By: <a th:href="@{'/user/' + ${post.user.id}}">[[${post.user.username}]]</a></h5></h2>
+
+    </li>
+</ul>
+
+</body>
+</html>
