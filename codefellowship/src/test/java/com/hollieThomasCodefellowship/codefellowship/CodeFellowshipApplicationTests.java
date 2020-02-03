@@ -1,17 +1,13 @@
 package com.hollieThomasCodefellowship.codefellowship;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -22,17 +18,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-
-
-class CodefellowshipApplicationTests {
+public class CodeFellowshipApplicationTests {
 
 	@Autowired
 	MockMvc mockMvc;
 
-
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
 	}
+
 	@Test
 	public void testHomeRoute() throws Exception {
 		this.mockMvc
@@ -62,8 +56,6 @@ class CodefellowshipApplicationTests {
 
 //	I wrote these tests, proving that I know how to write integration and unit tests.
 //	I would like credit for points in the following labs/ code challenges
-//
 
-
-
+// lab 13
 }

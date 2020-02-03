@@ -11,29 +11,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
 
-
 @Controller
 public class RouteControllers {
 
-@Autowired
-    ApplicationUserRepository applicationUserRepository;
+    @Autowired
+        ApplicationUserRepository applicationUserRepository;
 
-@Autowired
-    PasswordEncoder encoder;
+    @Autowired
+        PasswordEncoder encoder;
 
-@GetMapping("/")
-    public String goHome(Principal p, Model m){
-    if (p != null){
-        m.addAttribute("username", p.getName());
-        ApplicationUser user = applicationUserRepository.findByUsername(p.getName());
-        m.addAttribute("user", user);
+    @GetMapping("/")
+        public String goHome(Principal p, Model m){
+        if (p != null){
+            m.addAttribute("username", p.getName());
+            ApplicationUser user = applicationUserRepository.findByUsername(p.getName());
+            m.addAttribute("user", user);
+        }
+        return "home";
     }
-    return "home";
 }
-    }
 //used some demo code for starters. I followed the videos a lot too.
-
-
-
-
-
