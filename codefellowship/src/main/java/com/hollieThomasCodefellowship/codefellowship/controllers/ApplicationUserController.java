@@ -1,13 +1,7 @@
-
 package com.hollieThomasCodefellowship.codefellowship.controllers;
 
 import com.hollieThomasCodefellowship.codefellowship.models.ApplicationUser;
 import com.hollieThomasCodefellowship.codefellowship.models.ApplicationUserRepository;
-import com.hollieThomasCodefellowship.codefellowship.*;
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,11 +18,6 @@ import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-
 
 
 @Controller
@@ -46,8 +35,14 @@ public class ApplicationUserController {
     }
 
     @PostMapping("/signup")
-    public RedirectView signup (String username, String password, String
-            firstName, String lastName, Date dateOfBirth, String bio){
+    public RedirectView signup (
+            String username,
+            String password,
+            String firstName,
+            String lastName,
+            Date dateOfBirth,
+            String bio){
+
             if (applicationUserRepository.findByUsername(username) == null) {
                 ApplicationUser newUser = new ApplicationUser(username,
                         encoder.encode(password),
@@ -60,28 +55,28 @@ public class ApplicationUserController {
                 Authentication authentication = new  UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 return new RedirectView("/profile");
-
-            } else { return new RedirectView("/signup/?taken=true");}
+            } else {
+                return new RedirectView("/signup/?taken=true");
+            }
     }
 
     @GetMapping("/login")
     public String getLogin() {
         return "login";
     }
-//    @GetMapping("/login")
-//    public String getProfile(Principal p, Model m){
-//        return "profile";
-//    }
 
-
+    @PostMapping("/login")
+    public RedirectView getProfile(Principal p, Model m){
+        return new RedirectView("/profile");
+    }
+    
     @GetMapping("/user/{id}")
-        public String getUser(@PathVariable Long id, Principal p, Model m){
-            m.addAttribute("username", p.getName());
-            ApplicationUser user = applicationUserRepository.getOne(id);
-            m.addAttribute("user", user);
-            return "userinfo";
-        }
-
+    public String getUser(@PathVariable Long id, Principal p, Model m){
+        m.addAttribute("username", p.getName());
+        ApplicationUser user = applicationUserRepository.getOne(id);
+        m.addAttribute("user", user);
+        return "userinfo";
+    }
 
     @GetMapping("/viewusers")
     public String viewUser(Principal p, Model m){
@@ -101,13 +96,4 @@ public class ApplicationUserController {
         applicationUserRepository.save(userFollowingMe);
         return new RedirectView("/profile");
     }
-
-
-        }
-
-
-
-
-
-
-
+}
